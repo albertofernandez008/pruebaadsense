@@ -1,0 +1,15 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import AdSlot from '../../components/AdSlot.astro';
+export async function getStaticPaths(){ return (await getCollection('articulos')).map(a=>({params:{categoria:a.data.categoria,slug:a.id},props:{a}})); }
+const { a } = Astro.props; const { Content } = await render(a);
+const f = d => d.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});
+const ld = {"@context":"https://schema.org","@type":"Article",headline:a.data.title,datePublished:a.data.fecha,dateModified:a.data.actualizado??a.data.fecha};
+---
+<Layout title={`${a.data.title} | Autoconsumo Solar Hoy`} description={a.data.description}>
+<article><h1>{a.data.title}</h1>
+<p class="meta">{a.data.actualizado ? `Actualizado el ${f(a.data.actualizado)}` : `Publicado el ${f(a.data.fecha)}`}</p>
+<AdSlot slot={import.meta.env.PUBLIC_AD_SLOT_TOP} /><Content /><AdSlot slot={import.meta.env.PUBLIC_AD_SLOT_BOTTOM} /></article>
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</Layout>

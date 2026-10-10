@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { categorias } from '../../data/categorias';
+export function getStaticPaths(){ return categorias.map(c=>({params:{categoria:c.slug},props:{c}})); }
+const { c } = Astro.props;
+const arts = (await getCollection('articulos')).filter(a=>a.data.categoria===c.slug);
+---
+<Layout title={`${c.nombre} sobre autoconsumo solar | Autoconsumo Solar Hoy`} description={c.desc}>
+<div class="narrow"><h1>{c.nombre}</h1><p>{c.desc}</p>
+{arts.length ? <ul class="list">{arts.map(a=><li><a href={`/${c.slug}/${a.id}/`}>{a.data.title}</a><div class="meta">{a.data.description}</div></li>)}</ul> : <p>Estamos preparando los primeros artículos de esta sección.</p>}</div>
+</Layout>

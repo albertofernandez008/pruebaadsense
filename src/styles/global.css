@@ -1,0 +1,21 @@
+:root{--paper:#F6F8FA;--ink:#14232E;--slate:#1F5F6B;--sun:#F2A900;--sky:#DDEBF1;--line:#C9D6DE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3{font-family:Charter,"Bitstream Charter",Georgia,serif;line-height:1.2;margin:1.6em 0 .5em}
+h1{font-size:clamp(1.9rem,4.5vw,3rem);margin-top:0}a{color:var(--slate)}
+.top{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,4vw,3rem);border-bottom:1px solid var(--line)}
+.brand{font:700 1.2rem Charter,Georgia,serif;color:var(--ink);text-decoration:none;border-bottom:3px solid var(--sun)}
+.top nav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}.top nav a{text-decoration:none;color:var(--ink)}.top nav a:hover{color:var(--slate);text-decoration:underline}
+main{max-width:1000px;margin:0 auto;padding:2rem clamp(1rem,4vw,2rem) 3rem}
+article,.narrow{max-width:70ch}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2.5rem;align-items:start;margin-bottom:3rem}
+.calc{background:var(--sky);border-left:6px solid var(--sun);padding:1.4rem}
+.calc label{display:block;font-weight:600}.calc input{width:100%;font-size:1.3rem;padding:.5rem;margin:.4rem 0 1rem;border:1px solid var(--slate);background:#fff}
+.calc output{display:block;font-size:1.05rem}.calc small{display:block;margin-top:.8rem;color:#3c515d}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem}
+.cats a{display:block;text-decoration:none;color:inherit;border-top:3px solid var(--slate);padding-top:.6rem}.cats a:hover h3{text-decoration:underline}.cats h3{margin:0 0 .3rem}
+.list{list-style:none;padding:0}.list li{padding:.8rem 0;border-bottom:1px solid var(--line)}.list a{font-weight:600}
+.meta{color:#4a5e6a;font-size:.9rem}.ad{margin:1.5rem 0;min-height:90px}
+footer{border-top:1px solid var(--line);padding:1.5rem clamp(1rem,4vw,3rem);font-size:.9rem;color:#3c515d}footer a{margin-right:1rem}
+a:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}

@@ -1,0 +1,4 @@
+---
+const id = import.meta.env.PUBLIC_ADSENSE_ID; const { slot } = Astro.props;
+---
+{id && slot && (<div class="ad"><ins class="adsbygoogle" style="display:block" data-ad-client={id} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true"></ins><script is:inline>(adsbygoogle=window.adsbygoogle||[]).push({});</script></div>)}

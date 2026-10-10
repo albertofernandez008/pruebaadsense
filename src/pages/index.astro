@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import { getCollection } from 'astro:content';
+import { categorias } from '../data/categorias';
+const arts = (await getCollection('articulos')).sort((a,b)=>b.data.fecha.valueOf()-a.data.fecha.valueOf()).slice(0,8);
+---
+<Layout title="Autoconsumo solar en casa: precios, ayudas y guías | Autoconsumo Solar Hoy">
+<section class="hero"><div><h1>¿Te compensa poner placas solares en tu casa?</h1>
+<p>Precios reales, ayudas vigentes y trámites explicados paso a paso para propietarios en España. Empieza por una cuenta rápida.</p></div>
+<form class="calc" onsubmit="return false"><label for="f">Tu factura de luz mensual (€)</label><input id="f" type="number" min="20" max="1000" value="90">
+<output id="o"></output><small>Estimación orientativa con 1.500 kWh/kWp al año y ~0,15 €/kWh. Un estudio real depende de tu consumo y tejado.</small></form></section>
+<h2>Explora por tema</h2>
+<div class="cats">{categorias.map(c=><a href={`/${c.slug}/`}><h3>{c.nombre}</h3><p>{c.desc}</p></a>)}</div>
+<AdSlot slot={import.meta.env.PUBLIC_AD_SLOT_HOME} />
+<h2>Últimos artículos</h2>
+<ul class="list">{arts.map(a=><li><a href={`/${a.data.categoria}/${a.id}/`}>{a.data.title}</a><div class="meta">{a.data.description}</div></li>)}</ul>
+</Layout>
+<script is:inline>
+const f=document.getElementById('f'),o=document.getElementById('o');
+function c(){const b=+f.value||0,kwp=(b/0.15*12*0.6)/1500,ah=b*12*0.5;
+o.textContent=`Instalación orientativa: ${kwp.toFixed(1)} kWp · Ahorro posible: unos ${Math.round(ah)} € al año`}
+f.addEventListener('input',c);c();
+</script>
